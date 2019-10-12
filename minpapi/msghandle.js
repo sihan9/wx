@@ -16,11 +16,16 @@ function userMsg (wxmsg,retmsg){
             case'帮助':
             case'help':
             case'?':
+            case'？':
                 retmsg.msg = help();
                 retmsg.msgtype = 'text';
                 return formatMsg(retmsg);
             case'about':
-                retmsg.msg = '这里是开发者，请联系。。。解决';
+                retmsg.msg = '这里是开发者，请联系微信号sihan_996解决';
+                retmsg.msgtype = 'text';
+                return formatMsg(retmsg);
+            case 'who':
+                retmsg.msg = '姓名：司涵\n学号：2017011904';
                 retmsg.msgtype = 'text';
                 return formatMsg(retmsg);
             default:
