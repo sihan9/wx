@@ -52,6 +52,29 @@ function userMsg (wxmsg,retmsg){
 exports.userMsg = userMsg;
 exports.help = help;
 
+function eventMsg(wxmsg,retmsg){
+    //把返回消息的类型设置为text
+    retmsg.msgtype = 'text';
+    switch(wxmsg.Event){
+        case 'subscribe':
+            retmsg.msg = 'hi,来啦~';
+            return formatMsg(retmsg);
+        case 'unsubscribe':
+            console.log(wxmsg.FromUserName,'取消关注');
+            break;
+        case 'CLICK':
+            retmsg.msg = wxmsg.EventKey;
+            return formatMsg(retmsg);
+        case 'VIEW':
+            console.log('用户浏览',wxmsg.EventKey);
+            break;
+        default:
+            return '';
+    }
+}
 exports.msgDispatch = function (wxmsg,retmsg){
+    if(wxmsg.MsgType == 'event'){
+        return eventMsg(wxmsg,retmsg);
+    }
     return userMsg(wxmsg,retmsg);
 }
